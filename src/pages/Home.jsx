@@ -8,7 +8,6 @@ export default function Home({ onScrollRequest, descriptionRef }) {
       <Header />
       <Main onScrollRequest={onScrollRequest} />
       <Description ref={descriptionRef} />
-      <Main onScrollRequest={onScrollRequest} />
     </div>
   );
 }

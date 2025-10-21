@@ -36,7 +36,7 @@ const Description = forwardRef(function Description(props, ref) {
         </svg>
         <div className="desc-blockchain__container">
           <div className="desc-blockchain__imagewrap">
-            <img src="/assets/sputnik.png" alt="Blockchain Satellite" className="desc-blockchain__img"/>
+            <img src="/my-product-site/assets/sputnik.png" alt="Blockchain Satellite" className="desc-blockchain__img"/>
           </div>
           <div className="desc-blockchain__textwrap">
             <h2 className="desc-blockchain__title">
