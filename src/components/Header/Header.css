@@ -60,7 +60,7 @@
 .nav__link::after {
   content: '';
   position: absolute;
-  left: 0; bottom: -33px;
+  left: 0; bottom: -31px;
   width: 0;
   height: 3px;
   background: #ae6bff;
@@ -102,8 +102,8 @@
   width: 1px;
   height: 32px;
   background: linear-gradient(90deg, rgba(138, 92, 246,0.4) 0%, rgba(167, 139, 250, 0.4) 100%);
-  margin: 0 20px;
   box-shadow: 0 0 8px 4px rgba(138, 92, 246, 0.1); 
+  margin: 0 20px;
   border-radius: 1px;
 }
 
@@ -229,7 +229,6 @@
   box-shadow: 0 0 8px 4px rgba(138, 92, 246, 0.1); 
   position: absolute;
   left: 0;
-  bottom: -3px;
   z-index: 999;
   pointer-events: none;
 }

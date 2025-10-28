@@ -20,6 +20,7 @@ export default function Main({ onScrollRequest }) {
 
   return (
     <main className="main-bg">
+      
       <div className="blur-lamps-center">
         <div className="blur-lamp blur-lamp--blue" />
         <div className="blur-lamp blur-lamp--purple" />

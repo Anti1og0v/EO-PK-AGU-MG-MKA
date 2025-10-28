@@ -10,7 +10,15 @@
   justify-content: center;
   padding: 0;
 }
-
+.desc-blockchain__circles {
+  position: absolute;
+  left: -120px;
+  top: -90px;
+  width: 1400px;
+  height: 900px;
+  z-index: 1;
+  pointer-events: none;
+}
 .desc-blockchain__container {
   position: relative;
   z-index: 10;
@@ -100,13 +108,12 @@
   .desc-blockchain__img { width: 410px; }
   .desc-blockchain__container { gap: 22px; }
   .desc-blockchain__text { padding: 14px 8px 10px 12px; }
-  .desc-blockchain__title { font-size: 2.1rem; }
+  .desc-blockchain__title { font-size: 2rem; }
 }
 @media (max-width: 750px) {
   .desc-blockchain__container { flex-direction: column; align-items: center; gap: 22px;}
   .desc-blockchain__img { width: 82vw;}
   .desc-blockchain__textwrap { min-width: 0; padding-left: 0;}
-  .desc-blockchain__title { font-size: 1.3rem; }
   .desc-blockchain__text { max-width: none; }
 }
 .underline {
@@ -116,7 +123,6 @@
   box-shadow: 0 0 8px 4px rgba(138, 92, 246, 0.1); 
   position: absolute;
   left: 0;
-  bottom: -3px;
   z-index: 999;
   pointer-events: none;
 }
@@ -125,7 +131,6 @@
   position: absolute;
   inset: 0;
   width: 100vw;
-  height: 100vh;
   z-index: 2;
   pointer-events: none;
   display: block;
@@ -167,7 +172,7 @@
     padding-left: 2.5vw;
   }
   .desc-blockchain__title { font-size: 2.08rem; }
-  .desc-blockchain__text { padding: 16px 8px 35px 14px; }
+  .desc-blockchain__text { padding: 16px 8px 10px 14px; }
 }
 @media (max-width: 950px) {
   .desc-blockchain__container {
@@ -217,7 +222,7 @@
   }
   .desc-blockchain__text {
     font-size: 0.95rem;
-    padding: 10px 2vw 20px 2vw;
+    padding: 10px 2vw 7px 2vw;
     border-radius: 12px;
     max-width: 99vw;
   }
@@ -242,5 +247,5 @@
     left: 0;
     top: 0;
   }
-  .desc-blockchain__title { font-size: 1.5rem; margin-bottom: 7px;}
+  .desc-blockchain__title { font-size: 2rem; margin-bottom: 7px;}
 }

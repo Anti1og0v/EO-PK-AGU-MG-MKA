@@ -131,16 +131,16 @@
 }
 
 @media (max-width: 900px) {
-  .main__title { font-size: 2.15rem;}
+  .main__title { font-size: 3.15rem;}
   .blur-lamp--blue, .blur-lamp--purple {
     width:330px; height:230px; filter: blur(60px);
   }
   .blur-lamps-center { gap: 44px;}
 }
 @media (max-width: 600px) {
-  .main__title { font-size: 2rem;}
-  .main__btn { padding: 8px 10px; font-size: 1.5rem;}
+  .main__title { font-size: 2.5rem;}
+  .main__btn { padding: 12px 14px; font-size: 1.2rem;}
   .blur-lamps-center { gap: 19px;}
-  .main__subtitle { font-size: 1.2rem;}
+  .main__subtitle { font-size: 1.1rem; padding: 0 10px;} 
 }
 

@@ -1,0 +1,196 @@
+.process {
+  background: #0b0624;
+  font-family: 'Montserrat', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 90px 0;
+}
+.process__stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.94;
+  animation: star-blink 2.5s infinite alternate;
+}
+@keyframes star-blink {
+  0%, 100% { opacity: 1;}
+  40% { opacity: 0.22;}
+  80% { opacity: 0.84;}
+}
+.process__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 0 4vw;
+}
+.process__title {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 25px 30px;
+  letter-spacing: -.5px;
+  text-align: left;
+}
+.process__grid {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(2,1fr);
+  background: none;
+}
+
+.process__cell {
+  position: relative;
+  padding: 38px 26px 30px 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  border-right: 1.5px solid rgba(172,139,255,0.13);
+  border-bottom: 1.5px solid rgba(172,139,255,0.11);
+  transition: background .3s;
+}
+.process__cell--right {
+  border-right: none;
+}
+.process__cell--bottom {
+  border-bottom: none;
+}
+.process__icon {
+  margin-top: 50px;      
+  margin-bottom: 60px;    
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: transform 0.23s cubic-bezier(.68,.06,.46,.98), box-shadow 0.26s;
+}
+
+.process__icon img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0px 2px 16px #ae6bff82);
+  transition: box-shadow 0.23s, transform 0.25s cubic-bezier(.61,.09,.48,1.1);
+}
+
+
+.process__count {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #9177fa;
+  opacity: .7;
+  margin-bottom: 14px;
+  margin-left: 2px;
+  letter-spacing: 1px;
+}
+.process__text {
+  font-size: 1.19rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+.process__desc {
+  width: 100%;
+  color: #d8d2f3;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  opacity: 0.97;
+}
+
+
+.process__cell--right {
+  border-right:none;
+}
+.process__cell:last-child {
+  background: none;
+}
+@media (max-width: 1100px) {
+  .process__container { padding: 0 2vw;}
+  .process__grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3,1fr);}
+  .process__title { font-size: 3rem;}
+}
+@media (max-width: 700px) {
+  .process { padding: 22px 0 7px 0;}
+  .process__container { padding: 0 1vw;}
+  .process__grid { grid-template-columns: 1fr; gap: 8px;}
+  .process__cell { min-height: 128px; border-right:none; border-bottom: 1.5px solid rgba(172,139,255,0.10);}
+  .process__cell:last-child { border-bottom: none; }
+  .process__title { font-size: 2rem; text-align: center; margin: 0;}
+}
+
+.process-underline {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(138, 92, 246,0.4) 0%, rgba(167, 139, 250, 0.4) 100%);
+  box-shadow: 0 0 8px 4px rgba(138, 92, 246, 0.15); 
+  position: relative;
+  left: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  .process__cell {
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+  .process {
+    padding: 60px 0 40px 0;
+
+  }
+}
+
+@media (max-width: 700px) {
+  .process__icon img {
+    margin: 0 auto;
+  }
+  .process__icon {
+    width: 100%;
+  }
+  .process__text,
+  .process__desc {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .process__cell {
+    padding: 34px 32px 34px 32px;
+  }
+}
+
+.process__cell {
+  opacity: 0;
+  transform: translateY(-40px) scale(0.98);
+}
+.process__cell--animated {
+  animation: fadeInTop 2s cubic-bezier(0.19,1,0.22,1) forwards;
+}
+
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.98);
+  }
+  65% {
+    opacity: 0.6;
+    transform: translateY(8px) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
