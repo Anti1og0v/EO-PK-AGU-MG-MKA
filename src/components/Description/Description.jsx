@@ -1,64 +1,60 @@
-import React, { forwardRef } from 'react';
-import './Description.css';
+import React from "react";
+import "./Description.css";
 
-const Description = forwardRef(function Description(props, ref) {
+const cards = [
+  {
+    title: "База данных",
+    text: "Хранение и организация информации о спутниках, их орбитах и состоянии в реальном времени.",
+    img: '/my-product-site/assets/Descfirst.png',
+  },
+  {
+    title: "Интерфейс управления",
+    text: "Удобная панель для взаимодействия с системой и мониторинга работы многоспутниковой группировки.",
+    img: '/my-product-site/assets/Descsecond.png',
+  },
+  {
+    title: "Движок моделирования",
+    text: "Имитационное моделирование для тестирования сценариев и оптимизации параметров системы управления.",
+    img: '/my-product-site/assets/Descthird.png',
+  },
+  {
+    title: "Алгоритмическое ПО",
+    text: "Библиотека с классическими подходами, нейросетями и ИИ для оптимального управления спутниками.",
+    img: '/my-product-site/assets/Descfourth.png',
+  }
+];
+
+export default function Description() {
   return (
-    <>
-      <div className="underline"></div>
-      <section ref={ref} className="desc-blockchain">
-        <svg
-          className="desc-blockchain__dashed-circles"
-          width="100%"
-          height="100%"
-          viewBox="0 0 1000 1000"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <circle
-            className="desc-blockchain__dashed-big"
-            cx="500"
-            cy="500"
-            r="470"
-            stroke="#6c4fff"
-            strokeWidth="2.3"
-            fill="none"
-            strokeDasharray="29 51"
-          />
-          <circle
-            className="desc-blockchain__dashed-mid"
-            cx="500"
-            cy="500"
-            r="360"
-            stroke="#a89fff"
-            strokeWidth="2"
-            fill="none"
-            strokeDasharray="14 27"
-          />
-        </svg>
-        <div className="desc-blockchain__container">
-          <div className="desc-blockchain__imagewrap">
-            <img src="/my-product-site/assets/sputnik.png" alt="Blockchain Satellite" className="desc-blockchain__img"/>
-          </div>
-          <div className="desc-blockchain__textwrap">
-            <h2 className="desc-blockchain__title">
-              Что представляет собой данный<br/>
-              <span className="desc-blockchain__title-accent">программный комплекс?</span>
-            </h2>
-            <div className="desc-blockchain__text">
-              <p>
-                Программный комплекс для автономного группового управления многоспутниковыми группировками малых космических аппаратов наблюдения Земли — интеллектуальная система, позволяющая спутникам самостоятельно планировать съемки, распределять задачи внутри кластера и обмениваться данными без постоянного контроля с Земли.
-              </p>
-              <p>
-                Комплекс реализует распределённую архитектуру управления, в которой каждый спутник оснащён специализированным программным модулем для принятия решений и взаимодействия с другими аппаратами.
-              </p>
-              <p>
-                Система поддерживает координированное выполнение заданий по наблюдению, динамически перестраивается при изменении конфигурации группировки, автоматически выявляет и перераспределяет ресурсы в ответ на возникновение внештатных ситуаций.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-});
+    <div className="description-bg">
+      <div className="top-line">
+        <div className="top-line-glow"></div>
+        <div className="top-line-strip"></div>
+      </div>
 
-export default Description;
+      <div className="circle-number">1</div>
+
+      <div className="header-section">
+        <h1 className="title">Архитектура и назначение продукта</h1>
+        <div className="divider"></div>
+        <p className="description-text">
+          Программный комплекс предназначен для автономного группового управления многоспутниковыми группировками малых космических аппаратов наблюдения Земли и околоземного космоса с минимальным участием наземного комплекса управления.
+        </p>
+      </div>
+
+      <div className="cards-grid">
+        {cards.map((card, idx) => (
+          <div className="card" key={idx}>
+            <div className="card-corner-img-wrapper">
+              <img src={card.img} alt={`card-icon-${idx + 1}`} className="card-corner-img"/>
+              <span className="corner-circle"></span>
+            </div>
+            <h3 className="card-title">{card.title}</h3>
+            <p className="card-text">{card.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+

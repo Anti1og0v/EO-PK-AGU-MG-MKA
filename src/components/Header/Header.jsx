@@ -1,74 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import './Header.css';
+import { useEffect, useState } from "react";
+import "./Header.css";
 
-export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
+export default function Header({ onRequestClick, onRequestHover, onRequestUnhover }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [showLang, setShowLang] = useState(false);
+  const [currentLang, setCurrentLang] = useState("RU");
+  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [appear, setAppear] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-    return () => (document.body.style.overflow = '');
-  }, [mobileMenuOpen]);
-
-  useEffect(() => {
-    let lastScroll = window.scrollY;
-    const onScroll = () => {
-      const currentScroll = window.scrollY;
-      if (currentScroll <= 20) {
-        setShowHeader(true);
-        lastScroll = currentScroll;
-        return;
-      }
-      if (currentScroll > lastScroll) {
-        setShowHeader(false);
-      } else {
-        setShowHeader(true);  
-      }
-      lastScroll = currentScroll;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    setTimeout(() => setAppear(true), 70); 
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleBurgerClick = () => {
+    if (!mobileMenuVisible) {
+      setMobileMenuVisible(true);
+      setTimeout(() => setBurgerOpen(true), 10);
+    } else {
+      setBurgerOpen(false);
+      setTimeout(() => setMobileMenuVisible(false), 450); 
+    }
+  };
+
+  const langs = [
+    { code: "RU", label: "RU" },
+    { code: "EN", label: "EN" },
+    { code: "中文", label: "中文" }
+  ];
+
+  const handleLang = (code) => {
+    setCurrentLang(code);
+    setShowLang(false);
+    setBurgerOpen(false);
+    setTimeout(() => setMobileMenuVisible(false), 450);
+  };
+
   return (
-    <header className={`header${showHeader ? '' : ' header--hidden'}`}>
-      <div className="header__container">
-        <div className="header__logo">
-          <span className="logo__text">ЛИТСАМ</span>
-        </div>
-        <div className="header__right">
-          <nav className="header__nav">
-            <a href="#home" className="nav__link">Главная</a>
-            <a href="#docs" className="nav__link">Новости</a>
-            <a href="#blog" className="nav__link">О нас</a>
-            <a href="#pricing" className="nav__link">Проекты</a>
-            <a href="#company" className="nav__link">Контакты</a>
-          </nav>
-          <div className="header__divider" />
-          <div className="header__actions">
-            <button className="btn btn--demo">Оставить заявку</button>
-          </div>
-        </div>
-        <button
-          className={`header__burger ${mobileMenuOpen ? 'header__burger--open' : ''}`}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-      <div className="header__underline"></div>
-      <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'mobile-nav-overlay--open' : ''}`}>
-        <nav className="mobile-nav__links">
-          <a href="#home" className="nav__linkk" onClick={()=>setMobileMenuOpen(false)}>Главная</a>
-          <a href="#docs" className="nav__linkk" onClick={()=>setMobileMenuOpen(false)}>Новости</a>
-          <a href="#blog" className="nav__linkk" onClick={()=>setMobileMenuOpen(false)}>О нас</a>
-          <a href="#pricing" className="nav__linkk" onClick={()=>setMobileMenuOpen(false)}>Проекты</a>
-          <a href="#company" className="nav__linkk" onClick={()=>setMobileMenuOpen(false)}>Контакты</a>
-          <button className="btn btn--demo" onClick={()=>setMobileMenuOpen(false)}>Оставить заявку</button>
+    <header className={`nav-header${scrolled ? " nav-header--scrolled" : ""}${appear ? " header-appear" : ""}`}>
+      <div className="nav-header__container">
+        <div className="nav-header__logo">Литсам</div>
+        <nav className="nav-header__nav">
+          <a href="#">Главная</a>
+          <a href="#">Новости</a>
+          <a href="#">О нас</a>
+          <a href="#">Проекты</a>
+          <a href="#">Контакты</a>
         </nav>
+        <div className="nav-header__auth">
+          <div
+            className="lang-min"
+            onMouseEnter={() => setShowLang(true)}
+            onMouseLeave={() => setShowLang(false)}
+          >
+            <span className="lang-min-btn">{currentLang}</span>
+            <div className={`lang-min-drop${showLang ? " show" : ""}`}>
+              {langs.map((l) => (
+                <div
+                  key={l.code}
+                  className={`lang-min-item${l.code === currentLang ? " active" : ""}`}
+                  onClick={() => handleLang(l.code)}
+                >
+                  {l.label}
+                </div>
+              ))}
+            </div>
+          </div>
+          <a
+            href="#"
+            className="nav-header__btn"
+            onMouseEnter={onRequestHover}
+            onMouseLeave={onRequestUnhover}
+            onClick={e => {
+              e.preventDefault();
+              onRequestClick();
+            }}
+          >
+            Оставить заявку
+          </a>
+        </div>
+        <div
+          className={`burger${burgerOpen ? " open" : ""}`}
+          onClick={handleBurgerClick}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
+      {mobileMenuVisible && (
+        <div className={`mobile-menu${burgerOpen ? " show" : ""}`}>
+          <nav className="mobile-menu__nav">
+            <a href="#">Главная</a>
+            <a href="#">Новости</a>
+            <a href="#">О нас</a>
+            <a href="#">Проекты</a>
+            <a href="#">Контакты</a>
+            <div className="lang-min-mobile">
+              {langs.map((l) => (
+                <div
+                  key={l.code}
+                  className={`lang-min-item${l.code === currentLang ? " active" : ""}`}
+                  onClick={() => handleLang(l.code)}
+                >
+                  {l.label}
+                </div>
+              ))}
+            </div>
+            <a
+              href="#"
+              className="nav-header__btn mobile"
+              onClick={e => {
+                e.preventDefault();
+                onRequestClick();
+              }}
+            >
+              Оставить заявку
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
