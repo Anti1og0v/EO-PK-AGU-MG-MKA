@@ -22,12 +22,12 @@
   transition: opacity 0.8s cubic-bezier(.7,0,.3,1);
 }
 .hero-blackpage__bg1 {
-  background-image: url('/my-product-site/assets/cosmosblack6.png');
+  background-image: url('/my-product-site/assets/cosmosblack6.webp');
   opacity: 0.2;
   filter: blur(5px);
 }
 .hero-blackpage__bg2 {
-  background-image: url('/my-product-site/assets/cosmos.jpg');
+  background-image: url('/my-product-site/assets/cosmos.webp');
   opacity: 0;
 }
 .hero-blackpage.hover-bg .hero-blackpage__bg1 {
