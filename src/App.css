@@ -1,0 +1,6 @@
+body, html {
+  font-family: 'Manrope', 'Montserrat', Arial, sans-serif;
+}
+html, body {
+  overflow-x: hidden;
+}
