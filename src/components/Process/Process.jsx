@@ -1,83 +1,141 @@
-import React, { useRef, useEffect, useState } from 'react';
-import './Process.css';
+import React, { useEffect, useState, useRef } from "react";
+import "./Process.css";
 
 const steps = [
   {
-    icon: "/my-product-site/assets/process1.png",
-    text: "Оператор запускает систему",
-    desc: "Система разворачивается на сервере и готова к работе после быстрой установки и инициализации базы данных.",
+    number: 1,
+    title: "Оператор запускает систему",
+    text: "Система разворачивается на сервере и готова к работе после быстрой установки и инициализации базы данных.",
   },
   {
-    icon: "/my-product-site/assets/process3.png",
-    text: "Работа через веб-интерфейс",
-    desc: "Оператор авторизуется в удобной панели управления через браузер и получает доступ ко всем функциям.",
+    number: 2,
+    title: "Работа через веб-интерфейс",
+    text: "Оператор авторизуется в удобной панели управления через браузер и получает доступ ко всем функциям.",
   },
   {
-    icon: "/my-product-site/assets/process2.png",
-    text: "Выбор объекта и регистрация событий",
-    desc: "Все основные действия (выбор объекта, регистрация или редактирование событий, мониторинг) выполняются через интуитивный интерфейс.",
+    number: 3,
+    title: "Выбор объекта и регистрация событий",
+    text: "Все основные действия (выбор объекта, регистрация или редактирование событий, мониторинг) выполняются через интуитивный интерфейс.",
   },
   {
-    icon: "/my-product-site/assets/process4.png",
-    text: "Автоматизация рутинных задач",
-    desc: "Система автоматически фиксирует важные события, ведёт логи и отслеживает ключевые показатели эффективности.",
+    number: 4,
+    title: "Автоматизация рутинных задач",
+    text: "Система автоматически фиксирует важные события, ведёт логи и отслеживает ключевые показатели эффективности.",
   },
   {
-    icon: "/my-product-site/assets/process5.png",
-    text: "Быстрая интеграция",
-    desc: "Легко подключается к другим сервисам, поддерживает расширение и подключение дополнительного оборудования.",
+    number: 5,
+    title: "Быстрая интеграция",
+    text: "Легко подключается к другим сервисам, поддерживает расширение и подключение дополнительного оборудования.",
   },
   {
-    icon: "/my-product-site/assets/process6.png",
-    text: "Безопасность и контроль",
-    desc: "Доступ защищён, все действия операторов фиксируются для прозрачности и безопасной работы.",
+    number: 6,
+    title: "Безопасность и контроль",
+    text: "Доступ защищён, все действия операторов фиксируются для прозрачности и безопасной работы.",
   }
 ];
 
 export default function Process() {
-  const containerRef = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const circleNumberRef = useRef(null);
+  const headerSectionRef = useRef(null);
+  const cardRefs = useRef([]);
+  const [circleNumberVisible, setCircleNumberVisible] = useState(false);
+  const [headerSectionVisible, setHeaderSectionVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState([]);
 
   useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+    function observeVisibility(ref, setVisible, threshold = 0.8) {
+      if (!ref.current) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+          }
+        },
+        { threshold }
+      );
+
+      observer.observe(ref.current);
+
+      return () => {
+        if (ref.current) observer.unobserve(ref.current);
+      };
+    }
+
+    const circleCleanup = observeVisibility(circleNumberRef, setCircleNumberVisible, 0.5);
+    const headerCleanup = observeVisibility(headerSectionRef, setHeaderSectionVisible, 0.8);
+
+    return () => {
+      circleCleanup && circleCleanup();
+      headerCleanup && headerCleanup();
+    };
+  }, []);
+
+  useEffect(() => {
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.indexOf(entry.target);
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => {
+              if (!prev.includes(index)) {
+                return [...prev, index];
+              }
+              return prev;
+            });
+          }
+        });
       },
-      { threshold: 0.2 }
+      { threshold: 0.8 }
     );
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
+
+    cardRefs.current.forEach((ref) => {
+      if (ref) cardObserver.observe(ref);
+    });
+
+    return () => {
+      cardRefs.current.forEach((ref) => {
+        if (ref) cardObserver.unobserve(ref);
+      });
+    };
   }, []);
 
   return (
-    <>
-      <div className="process-underline"></div>
-      <section className="process">
-        <div className="process__container" ref={containerRef}>
-          <h2 className="process__title">Как это работает?</h2>
-          <div className="process__grid">
-            {steps.map((s, idx) => (
-              <div
-                key={idx}
-                className={`process__cell ${visible ? 'process__cell--animated' : ''} ${
-                  idx > 2 ? "process__cell--bottom" : ""
-                } ${[2, 5].includes(idx) ? "process__cell--right" : ""}`}
-                style={{
-                  animationDelay: visible ? `${0.24 + idx * 0.19}s` : '0s'
-                }}
-              >
-                <div className="process__count">{`0${idx + 1}`}</div>
-                <div className="process__icon"><img src={s.icon} alt="" /></div>
-                <div className="process__text">{s.text}</div>
-                <div className="process__desc">{s.desc}</div>
-              </div>
-            ))}
+    <div className="process-bg">
+      <div
+        className={`process-circle-number ${circleNumberVisible ? 'fade-in-opacity' : 'fade-in-opacity-hidden'}`}
+        ref={circleNumberRef}
+      >
+        3
+      </div>
+
+      <div
+        className={`process-header-section ${headerSectionVisible ? 'fade-in-opacity' : 'fade-in-opacity-hidden'}`}
+        ref={headerSectionRef}
+      >
+        <h1 className="process-title">Процесс работы системы</h1>
+        <div className="process-divider"></div>
+        <p className="process-description-text">
+          Пошаговая схема показывает, как легко начать работу с продуктом: от инициализации и простого входа до полной автоматизации задач, интеграции с внешними сервисами и обеспечения безопасности всех операций.
+        </p>
+      </div>
+
+      <div className="process-cards-grid">
+        {steps.map((card, idx) => (
+          <div
+            className={`process-card ${visibleCards.includes(idx) ? 'fade-in' : 'fade-in-hidden'}`}
+            key={idx}
+            ref={(el) => (cardRefs.current[idx] = el)}
+          >
+            <div className="process-card-corner-img-wrapper">
+              <span className="process-step-number">{card.number}</span>
+              <span className="process-corner-circle"></span>
+            </div>
+            <h3 className="process-card-title">{card.title}</h3>
+            <p className="process-card-text">{card.text}</p>
           </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </div>
   );
 }

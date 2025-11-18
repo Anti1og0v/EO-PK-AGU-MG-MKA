@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Header.css";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header({ onRequestClick, onRequestHover, onRequestUnhover }) {
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [showLang, setShowLang] = useState(false);
   const [currentLang, setCurrentLang] = useState("RU");
@@ -10,7 +12,7 @@ export default function Header({ onRequestClick, onRequestHover, onRequestUnhove
   const [appear, setAppear] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setAppear(true), 70); 
+    setTimeout(() => setAppear(true), 70);
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -22,7 +24,7 @@ export default function Header({ onRequestClick, onRequestHover, onRequestUnhove
       setTimeout(() => setBurgerOpen(true), 10);
     } else {
       setBurgerOpen(false);
-      setTimeout(() => setMobileMenuVisible(false), 450); 
+      setTimeout(() => setMobileMenuVisible(false), 450);
     }
   };
 
@@ -39,16 +41,28 @@ export default function Header({ onRequestClick, onRequestHover, onRequestUnhove
     setTimeout(() => setMobileMenuVisible(false), 450);
   };
 
+  const handleMobileNavClick = (path) => {
+    setBurgerOpen(false);
+    setTimeout(() => {
+      setMobileMenuVisible(false);
+      navigate(path);
+    }, 450);
+  };
+
   return (
     <header className={`nav-header${scrolled ? " nav-header--scrolled" : ""}${appear ? " header-appear" : ""}`}>
       <div className="nav-header__container">
-        <div className="nav-header__logo">Литсам</div>
+        <div
+          className="nav-header__logo"
+          style={{ cursor: "pointer" }}
+          onClick={() => window.location.href = "https://litsam.ru/index.php/ru/homepage-ru"}
+        >
+          Литсам
+        </div>
         <nav className="nav-header__nav">
-          <a href="#">Главная</a>
-          <a href="#">Новости</a>
-          <a href="#">О нас</a>
-          <a href="#">Проекты</a>
-          <a href="#">Контакты</a>
+          <Link to="/">Главная</Link>
+          <Link to="/functional">Функциональные описания</Link>
+          <Link to="/activity">Научная деятельность</Link>
         </nav>
         <div className="nav-header__auth">
           <div
@@ -56,31 +70,10 @@ export default function Header({ onRequestClick, onRequestHover, onRequestUnhove
             onMouseEnter={() => setShowLang(true)}
             onMouseLeave={() => setShowLang(false)}
           >
-            <span className="lang-min-btn">{currentLang}</span>
-            <div className={`lang-min-drop${showLang ? " show" : ""}`}>
-              {langs.map((l) => (
-                <div
-                  key={l.code}
-                  className={`lang-min-item${l.code === currentLang ? " active" : ""}`}
-                  onClick={() => handleLang(l.code)}
-                >
-                  {l.label}
-                </div>
-              ))}
-            </div>
           </div>
-          <a
-            href="#"
-            className="nav-header__btn"
-            onMouseEnter={onRequestHover}
-            onMouseLeave={onRequestUnhover}
-            onClick={e => {
-              e.preventDefault();
-              onRequestClick();
-            }}
-          >
+          <Link to="/request" className="nav-header__btn">
             Оставить заявку
-          </a>
+          </Link>
         </div>
         <div
           className={`burger${burgerOpen ? " open" : ""}`}
@@ -94,32 +87,31 @@ export default function Header({ onRequestClick, onRequestHover, onRequestUnhove
       {mobileMenuVisible && (
         <div className={`mobile-menu${burgerOpen ? " show" : ""}`}>
           <nav className="mobile-menu__nav">
-            <a href="#">Главная</a>
-            <a href="#">Новости</a>
-            <a href="#">О нас</a>
-            <a href="#">Проекты</a>
-            <a href="#">Контакты</a>
-            <div className="lang-min-mobile">
-              {langs.map((l) => (
-                <div
-                  key={l.code}
-                  className={`lang-min-item${l.code === currentLang ? " active" : ""}`}
-                  onClick={() => handleLang(l.code)}
-                >
-                  {l.label}
-                </div>
-              ))}
-            </div>
-            <a
-              href="#"
+            <Link
+              to="/"
+              onClick={() => handleMobileNavClick("/")}
+            >
+              Главная
+            </Link>
+            <Link
+              to="/functional"
+              onClick={() => handleMobileNavClick("/functional")}
+            >
+              Функциональные описания
+            </Link>
+            <Link
+              to="/activity"
+              onClick={() => handleMobileNavClick("/activity")}
+            >
+              Научная деятельность
+            </Link>
+            <Link
+              to="/request"
               className="nav-header__btn mobile"
-              onClick={e => {
-                e.preventDefault();
-                onRequestClick();
-              }}
+              onClick={() => handleMobileNavClick("/request")}
             >
               Оставить заявку
-            </a>
+            </Link>
           </nav>
         </div>
       )}
