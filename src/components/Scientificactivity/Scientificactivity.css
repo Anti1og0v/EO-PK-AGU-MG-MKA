@@ -109,7 +109,6 @@
   }
 }
 
-/* Адаптация для планшетов */
 @media (max-width: 768px) {
   .downloads-bg {
     padding: 40px 10px;
@@ -148,7 +147,6 @@
   }
 }
 
-/* Адаптация для мобильных устройств до 480px */
 @media (max-width: 480px) {
   .downloads-bg {
     padding: 18vw 2vw;
