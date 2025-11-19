@@ -9,42 +9,50 @@ export default function Scientificactivity() {
     {
       title: "Документ 1",
       description: "Подробное описание первого документа...",
-      url: "",
+      url: "/EO-PK-AGU-MG-MKA/assets/doc.pdf",
+      fileName: "document1.pdf",
     },
     {
       title: "Документ 2",
       description: "Подробное описание второго документа...",
-      url: "",
+      url: "/assets/pdf/document2.pdf",
+      fileName: "document2.pdf",
     },
     {
       title: "Документ 3",
       description: "Третий документ с подробным описанием...",
-      url: "",
+      url: "/assets/pdf/document3.pdf",
+      fileName: "document3.pdf",
     },
     {
       title: "Документ 4",
       description: "Описание четвёртого документа...",
-      url: "",
+      url: "/assets/pdf/document4.pdf",
+      fileName: "document4.pdf",
     },
     {
       title: "Документ 5",
       description: "Подробное описание пятого документа...",
-      url: "",
+      url: "/assets/pdf/document5.pdf",
+      fileName: "document5.pdf",
     },
     {
       title: "Документ 6",
       description: "Подробное описание шестого документа...",
-      url: "",
+      url: "/assets/pdf/document6.pdf",
+      fileName: "document6.pdf",
     },
     {
       title: "Документ 7",
       description: "Седьмой документ с подробным описанием...",
-      url: "",
+      url: "/assets/pdf/document7.pdf",
+      fileName: "document7.pdf",
     },
     {
       title: "Документ 8",
       description: "Описание восьмого документа...",
-      url: "",
+      url: "/assets/pdf/document8.pdf",
+      fileName: "document8.pdf",
     },
   ];
 
@@ -82,6 +90,15 @@ export default function Scientificactivity() {
     };
   }, [files.length]);
 
+  const handleDownload = (url, fileName) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="downloads-bg">
       <div className="downloads-header fade-in">
@@ -91,7 +108,6 @@ export default function Scientificactivity() {
           Здесь вы найдёте все необходимые PDF-файлы и документы для скачивания.
         </p>
       </div>
-
       <div className="downloads-container">
         {files.map((file, index) => (
           <div
@@ -103,14 +119,12 @@ export default function Scientificactivity() {
               <h2 className="download-item__title">{file.title}</h2>
               <p className="download-item__description">{file.description}</p>
             </div>
-            <a
+            <button
               className="download-item__btn"
-              href={file.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => handleDownload(file.url, file.fileName)}
             >
               Скачать
-            </a>
+            </button>
           </div>
         ))}
       </div>
