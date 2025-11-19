@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./Main.css";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Main({ isBgActive, onRequestClick, onRequestHover, onRequestUnhover, onDescriptionScroll }) {
   const [appeared, setAppeared] = useState(false);
@@ -8,6 +9,8 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     setTimeout(() => setAppeared(true), 80);
@@ -78,17 +81,12 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
             участием наземного сегмента.
           </p>
           <div className="hero-blackpage__actions">
-            <a
+            <Link
+              to="/request"
               className="nav-main__btn"
-              href="#"
-
-              onClick={e => {
-                e.preventDefault();
-                onRequestClick();
-              }}
             >
               Оставить заявку
-            </a>
+            </Link>
             <a
               className="doc-dropdown-btn"
               href="#"

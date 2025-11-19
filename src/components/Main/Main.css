@@ -290,6 +290,9 @@
 }
 
 @media (max-width: 600px) {
+  .doc-dropdown-btn:hover::after {
+    display: none;
+  }
   .hero-blackpage__container {
     min-height: 90vh;
   }

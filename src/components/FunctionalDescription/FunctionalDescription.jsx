@@ -13,11 +13,11 @@ export default function FunctionalDescription() {
     },
     {
       title: "Описание 3",
-      text: "Sed ut perspiciatis unde omnis iste natus error...",
+      text: "Duis aute irure dolor in reprehenderit",
     },
     {
       title: "Описание 4",
-      text: "Nemo enim ipsam voluptatem quia voluptas...",
+      text: "Duis aute irure dolor in reprehenderit",
     },
   ];
 

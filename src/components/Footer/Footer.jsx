@@ -7,6 +7,9 @@ export default function FooterBottom() {
       <p className="copyright">
         Copyright 2025 © | All Rights Reserved
       </p>
+      <div className="made-by">
+        Made by <span className="antilogov-underline">Antilogov</span>
+      </div>
     </footer>
   );
 }
