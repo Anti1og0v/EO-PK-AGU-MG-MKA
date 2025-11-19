@@ -4,20 +4,34 @@ import "./FunctionalDescription.css";
 export default function FunctionalDescription() {
   const descriptions = [
     {
-      title: "Описание 1",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..Lorem ipsum dolor sit amet, consectetur adipiscing elit..elit...",
+      title: "Программный комплекс автономного группового управления многоспутниковыми группировками МКА",
+      text:
+        "ЭО ПК АГУ МГ МКА — это программный комплекс для моделирования, отладки и демонстрации технологий автономного управления многоспутниковыми группировками малых космических аппаратов наблюдения Земли. Система позволяет проверять и оптимизировать модельно-алгоритмические решения перед их внедрением в реальные космические миссии.",
     },
     {
-      title: "Описание 2",
-      text: "Duis aute irure dolor in reprehenderit... Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...Duis aute irure dolor in reprehenderit...",
+      title: "Назначение комплекса",
+      text:
+        "Продукт предназначен для:\n- экспериментальной проверки технологий распределённого автономного управления группировкой МКА;\n- оценки эффективности алгоритмов планирования целевого применения;\n- моделирования взаимодействия космических аппаратов между собой и с наземной инфраструктурой;\n- сквозного анализа выполнения заявок ДЗЗ: от момента появления цели до передачи данных на Землю. Комплекс имитирует работу распределённой группировки, организованной в кластеры с лидирующими и ведомыми аппаратами, полностью воспроизводя логику обмена данными, принятия решений и управления полётом.",
     },
     {
-      title: "Описание 3",
-      text: "Duis aute irure dolor in reprehenderit",
+      title: "Ключевые возможности",
+      text:
+        "1. Имитационное моделирование работы группировки:\n- дискретно-событийная модель;\n- создание программных “агентов” для каждого МКА;\n- моделирование динамики орбит, энергетики, связи и передачи данных;\n- автоматическое формирование очереди событий и обработка в режиме модельного времени.\n\n2. Автономное планирование целевого применения:\nКаждый аппарат формирует собственный план работы на основе:\n- новых поступающих заявок;\n- текущего состояния кластера;\n- окон связи с НП и другими КА;\n- энергетических ограничений (заряд АКБ);\n- ограничений по освещённости и геометрии съёмки.\n\n3. Распределение заявок ДЗЗ между аппаратами:\n- распределение/перераспределение заявок внутри кластера;\n- межкластерное перераспределение;\n- оптимизация выполнения заявок с учётом видимости и ограничений автономного управления.\n\n4. Моделирование передачи данных:\n- планирование передачи данных на НП;\n- оценка возможностей межспутниковой связи;\n- подбор оптимальных маршрутов доставки данных.\n\n5. Полный набор инструментов для подготовки и анализа данных:\n- интерфейс включает формы для задания различных параметров;\n- доступны логи выполнения заявок, планы съёмок и полёта, статистика эффективности, отладочные логи СМАО и движка.",
     },
     {
-      title: "Описание 4",
-      text: "Duis aute irure dolor in reprehenderit",
+      title: "Архитектура комплекса",
+      text:
+        "Программный комплекс включает:\n- базу данных PostgreSQL;\n- рабочее место оператора (АРМ) с пользовательским интерфейсом;\n- движок имитационного моделирования;\n- библиотеку СМАО (модельно-алгоритмическое обеспечение);\n- информационную шину для обмена данными между модулями.\nИменно библиотека СМАО является ядром системы, обеспечивая реализацию поведения МКА и их взаимодействия.",
+    },
+    {
+      title: "Технологический стек и требования",
+      text:
+        "Операционная среда:\n- Astra Linux;\n- Google Chrome;\n- JDK 17;\n- Node.js 16.20.2 / npm;\n- GCC 9.4.0;\n- Python 3.10;\n- PostgreSQL 12.20;\n- Qt, qmake (для сборки СМАО и ИМ).\n\nМинимальные аппаратные требования:\n- Intel Core i5 (6-ядерный, 2.9–4.3 ГГц);\n- 8 ГБ RAM, SSD 128+ ГБ;\n- Монитор 27″, IPS, 1920×1080.",
+    },
+    {
+      title: "Функциональные модули интерфейса",
+      text:
+        "Модули подготовки данных:\n- наземные пункты;\n- космические аппараты и орбитальные группировки;\n- модели устройств КА;\n- параметры времени;\n- каталог целей и заявки.\n\nМодули промежуточных расчётов:\n- КА-НП (план сеансов связи);\n- КА-КА (межспутниковая связь).\n\nМодули анализа результатов:\n- лог выполнения заявок;\n- лог передачи данных;\n- статистика;\n- планы съёмок и полёта;\n- логи движка и событий.",
     },
   ];
 
@@ -71,7 +85,7 @@ export default function FunctionalDescription() {
             ref={(el) => (refsArr.current[index] = el)}
           >
             <h2 className="fd-item-title">{item.title}</h2>
-            <p className="fd-item-text">{item.text}</p>
+            <p className="fd-item-text" style={{ whiteSpace: "pre-line" }}>{item.text}</p>
           </div>
         ))}
       </div>
