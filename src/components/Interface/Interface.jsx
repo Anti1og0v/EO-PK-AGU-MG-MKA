@@ -13,14 +13,25 @@ export default function SpecifySection() {
   useEffect(() => {
     function obs(ref, cb, threshold = 0.3) {
       if (!ref.current) return;
-      const o = new window.IntersectionObserver(([e]) => { if (e.isIntersecting) cb(true); }, { threshold });
+      const o = new window.IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) cb(true);
+        },
+        { threshold }
+      );
       o.observe(ref.current);
       return () => o.disconnect();
     }
+
     const c1 = obs(titleRef, setTitleVisible, 1);
     const c2 = obs(tabsRef, setTabsVisible, 1);
     const c3 = obs(previewRef, setPreviewVisible, 0.4);
-    return () => { c1 && c1(); c2 && c2(); c3 && c3(); };
+
+    return () => {
+      c1 && c1();
+      c2 && c2();
+      c3 && c3();
+    };
   }, []);
 
   const [activeTab, setActiveTab] = useState("technical");
@@ -112,7 +123,8 @@ export default function SpecifySection() {
     performImageTransition(() => {
       setActiveImageIndex((prev) => ({
         ...prev,
-        [activeTab]: (prev[activeTab] + 1) % tabImages[activeTab].length,
+        [activeTab]:
+          (prev[activeTab] + 1) % tabImages[activeTab].length,
       }));
     });
   };
@@ -136,7 +148,8 @@ export default function SpecifySection() {
     performImageTransition(() => {
       setActiveImageIndex((prev) => ({
         ...prev,
-        [activeTab]: (prev[activeTab] + 1) % tabImages[activeTab].length,
+        [activeTab]:
+          (prev[activeTab] + 1) % tabImages[activeTab].length,
       }));
     });
   };
@@ -155,6 +168,7 @@ export default function SpecifySection() {
       >
         Демонстрация интерфейса системы
       </h1>
+
       <div
         ref={tabsRef}
         className={`specify-tabs ${
@@ -176,6 +190,7 @@ export default function SpecifySection() {
           </button>
         ))}
       </div>
+
       <div
         ref={previewRef}
         className={`specify-preview-wrapper ${
@@ -189,6 +204,7 @@ export default function SpecifySection() {
         >
           ❮
         </button>
+
         <div className="specify-preview">
           <div
             className={`preview-bg bg-technical ${
@@ -205,9 +221,12 @@ export default function SpecifySection() {
               activeTab === "analytics" ? "visible" : ""
             }`}
           ></div>
+
           <div
             className={`preview-screen ${
-              ["technical", "operational", "analytics"].includes(activeTab)
+              ["technical", "operational", "analytics"].includes(
+                activeTab
+              )
                 ? "visible"
                 : ""
             }`}
@@ -219,7 +238,9 @@ export default function SpecifySection() {
                   setIsLightboxOpen(true);
                 }
               }}
-              style={currentImageIndex === 0 ? { cursor: "default" } : {}}
+              style={
+                currentImageIndex === 0 ? { cursor: "default" } : {}
+              }
             >
               <img
                 key={`${activeTab}-${currentImageIndex}`}
@@ -235,9 +256,11 @@ export default function SpecifySection() {
                   viewBox="0 0 24 24"
                   width="64"
                   height="64"
-                  style={currentImageIndex === 0 ? { opacity: 0 } : {}}
+                  style={
+                    currentImageIndex === 0 ? { opacity: 0 } : {}
+                  }
                 >
-                  <rcle
+                  <ircle
                     cx="10"
                     cy="10"
                     r="6"
@@ -257,10 +280,12 @@ export default function SpecifySection() {
               </div>
             </div>
           </div>
+
           <div className="image-counter">
             {currentImageIndex + 1} / {currentImages.length}
           </div>
         </div>
+
         <button
           className="nav-arrow nav-next"
           onClick={handleNextImage}
@@ -269,8 +294,12 @@ export default function SpecifySection() {
           ❯
         </button>
       </div>
+
       {isLightboxOpen && (
-        <div className="lightbox-overlay" onClick={() => setIsLightboxOpen(false)}>
+        <div
+          className="lightbox-overlay"
+          onClick={() => setIsLightboxOpen(false)}
+        >
           <div
             className="lightbox-container"
             onClick={(e) => e.stopPropagation()}
