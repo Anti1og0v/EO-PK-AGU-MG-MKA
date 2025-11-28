@@ -6,6 +6,8 @@ import Management from "../components/Management/Management.jsx";
 import Process from "../components/Process/Process.jsx";
 import Interface from "../components/Interface/Interface.jsx";
 import Footer from "../components/Footer/Footer.jsx";
+import ContactsMap from "../components/ContactsMap/ContactsMap.jsx";
+
 
 import "./Home.css";
 
@@ -56,6 +58,7 @@ export default function Home() {
       <Management />
       <Process />
       <Interface />
+      <ContactsMap />
 
     </div>
   );

@@ -1,7 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Interface.css";
 
 export default function SpecifySection() {
+  const titleRef = useRef(null);
+  const tabsRef = useRef(null);
+  const previewRef = useRef(null);
+
+  const [titleVisible, setTitleVisible] = useState(false);
+  const [tabsVisible, setTabsVisible] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(false);
+
+  useEffect(() => {
+    function obs(ref, cb, threshold = 0.3) {
+      if (!ref.current) return;
+      const o = new window.IntersectionObserver(([e]) => { if (e.isIntersecting) cb(true); }, { threshold });
+      o.observe(ref.current);
+      return () => o.disconnect();
+    }
+    const c1 = obs(titleRef, setTitleVisible, 1);
+    const c2 = obs(tabsRef, setTabsVisible, 1);
+    const c3 = obs(previewRef, setPreviewVisible, 0.4);
+    return () => { c1 && c1(); c2 && c2(); c3 && c3(); };
+  }, []);
+
   const [activeTab, setActiveTab] = useState("technical");
   const [activeImageIndex, setActiveImageIndex] = useState({
     technical: 0,
@@ -26,9 +47,8 @@ export default function SpecifySection() {
     analytics: [
       "/EO-PK-AGU-MG-MKA/assets/analytics1.webp",
       "/EO-PK-AGU-MG-MKA/assets/analytics2.webp",
-      "EO-PK-AGU-MG-MKA/assets/analytics3.webp",
+      "/EO-PK-AGU-MG-MKA/assets/analytics3.webp",
       "/EO-PK-AGU-MG-MKA/assets/analytics4.webp",
-
     ],
   };
 
@@ -66,7 +86,6 @@ export default function SpecifySection() {
 
   const handleTabClick = (tabId) => {
     if (tabId === activeTab || isTransitioning) return;
-    
     performImageTransition(() => {
       setActiveTab(tabId);
       setActiveImageIndex((prev) => ({
@@ -128,14 +147,26 @@ export default function SpecifySection() {
 
   return (
     <div className="specify-section">
-      <h1 className="specify-title">
+      <h1
+        ref={titleRef}
+        className={`specify-title ${
+          titleVisible ? "fade-in" : "fade-in-hidden"
+        }`}
+      >
         Демонстрация интерфейса системы
       </h1>
-      <div className="specify-tabs">
+      <div
+        ref={tabsRef}
+        className={`specify-tabs ${
+          tabsVisible ? "fade-in" : "fade-in-hidden"
+        }`}
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`specify-tab ${activeTab === tab.id ? "active" : ""}`}
+            className={`specify-tab ${
+              activeTab === tab.id ? "active" : ""
+            }`}
             onClick={() => handleTabClick(tab.id)}
             disabled={isTransitioning}
           >
@@ -145,9 +176,14 @@ export default function SpecifySection() {
           </button>
         ))}
       </div>
-      <div className="specify-preview-wrapper">
-        <button 
-          className="nav-arrow nav-prev" 
+      <div
+        ref={previewRef}
+        className={`specify-preview-wrapper ${
+          previewVisible ? "fade-in" : "fade-in-hidden"
+        }`}
+      >
+        <button
+          className="nav-arrow nav-prev"
           onClick={handlePrevImage}
           disabled={isTransitioning}
         >
@@ -201,7 +237,7 @@ export default function SpecifySection() {
                   height="64"
                   style={currentImageIndex === 0 ? { opacity: 0 } : {}}
                 >
-                  <circle
+                  <rcle
                     cx="10"
                     cy="10"
                     r="6"
@@ -225,8 +261,8 @@ export default function SpecifySection() {
             {currentImageIndex + 1} / {currentImages.length}
           </div>
         </div>
-        <button 
-          className="nav-arrow nav-next" 
+        <button
+          className="nav-arrow nav-next"
           onClick={handleNextImage}
           disabled={isTransitioning}
         >
@@ -245,8 +281,8 @@ export default function SpecifySection() {
             >
               ✕
             </button>
-            <button 
-              className="lightbox-arrow lightbox-prev" 
+            <button
+              className="lightbox-arrow lightbox-prev"
               onClick={handleLightboxPrev}
               disabled={isTransitioning}
             >
@@ -260,8 +296,8 @@ export default function SpecifySection() {
                 isTransitioning ? " lightbox-image-leave" : ""
               }`}
             />
-            <button 
-              className="lightbox-arrow lightbox-next" 
+            <button
+              className="lightbox-arrow lightbox-next"
               onClick={handleLightboxNext}
               disabled={isTransitioning}
             >

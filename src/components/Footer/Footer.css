@@ -52,3 +52,8 @@
   transform-origin: right;
   transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), transform-origin 0s;
 }
+@media (max-width: 330px) {
+  .footer-bottom {
+    padding-right: 30px;
+  }
+}
