@@ -11,7 +11,6 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     setTimeout(() => setAppeared(true), 80);
   }, []);
@@ -71,20 +70,31 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
 
       <div className={`hero-blackpage__container${appeared ? " enter-appear" : ""}`}>
         <div className="hero-blackpage__left">
-          <div className="hero-blackpage__seed">Новый уровень управления</div>
-          <h1 className="hero-blackpage__title">Автономный разум орбит</h1>
-          <p className="hero-blackpage__subtitle">
-            «Экспериментальный программный комплекс автономного
-            группового управления многоспутниковыми группировками» <br />
-            Инновационное решение для управления спутниковыми <br />
-            кластерами дистанционного зондирования Земли с минимальным
-            участием наземного сегмента.
-          </p>
-          <div className="hero-blackpage__actions">
-            <Link
-              to="/request"
-              className="nav-main__btn"
-            >
+          <div className="hero-blackpage__seed fade-in-item" style={{ "--delay": "0.2s" }}>
+            Новый уровень управления
+          </div>
+          
+          <h1 className="hero-blackpage__title fade-in-item" style={{ "--delay": "0.4s" }}>
+            Автономный разум на орбите
+          </h1>
+
+          <div className="hero-blackpage__subtitle fade-in-item" style={{ "--delay": "0.6s" }}>
+            Мультиагентный подход нового поколения в управлении орбитальными группировками.
+          </div>
+
+          <div className="hero-blackpage__focus-title fade-in-item" style={{ "--delay": "0.8s" }}>
+            Что мы решаем:
+          </div>
+
+          <ul className="hero-blackpage__focus-list fade-in-item" style={{ "--delay": "1s" }}>
+            <li>Распределение заявок на съёмку поверхности Земли</li>
+            <li>Планирование работы наземных средств</li>
+            <li>Маршрутизация обмена данными между спутниками</li>
+            <li>Автоматизация смены режимов полёта КА</li>
+          </ul>
+
+          <div className="hero-blackpage__actions fade-in-item" style={{ "--delay": "1.2s" }}>
+            <Link to="/request" className="nav-main__btn">
               Оставить заявку
             </Link>
             <a

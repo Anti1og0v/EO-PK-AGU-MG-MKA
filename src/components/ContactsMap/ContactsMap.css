@@ -83,7 +83,6 @@
   border-radius: 0;
 }
 
-/* Анимация появления для всей карты */
 .fade-in {
   opacity: 1;
   transform: translateY(0);
