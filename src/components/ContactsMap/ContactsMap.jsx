@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./ContactsMap.css";
+import { useTranslation } from "react-i18next";
 
 const ORGANIZATION = {
   coords: [59.939774, 30.269693],
-  address: "199178, Санкт-Петербург, 14 линия, д.39",
+  addressKey: "contacts.addressValue",
   phone: "+7 (911) 010-17-65",
   email: "valeriov@yandex.ru",
 };
@@ -15,16 +16,24 @@ export default function ContactsMap() {
   const [headerVisible, setHeaderVisible] = useState(false);
   const [innerVisible, setInnerVisible] = useState(false);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const opts = { threshold: 0.3 };
 
     const obsHeader = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setHeaderVisible(true); }, opts
+      ([entry]) => {
+        if (entry.isIntersecting) setHeaderVisible(true);
+      },
+      opts
     );
     if (headerRef.current) obsHeader.observe(headerRef.current);
 
     const obsInner = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInnerVisible(true); }, opts
+      ([entry]) => {
+        if (entry.isIntersecting) setInnerVisible(true);
+      },
+      opts
     );
     if (innerRef.current) obsInner.observe(innerRef.current);
 
@@ -40,28 +49,34 @@ export default function ContactsMap() {
   return (
     <section className="contacts-map-section">
       <div className="contacts-map-header" ref={headerRef}>
-        <h2 className={`contacts-map-header-title ${headerVisible ? "fade-in" : "fade-in-hidden"}`}>
-          Наша локация
+        <h2
+          className={`contacts-map-header-title ${
+            headerVisible ? "fade-in" : "fade-in-hidden"
+          }`}
+        >
+          {t("contacts.locationTitle")}
         </h2>
       </div>
       <div
-        className={`contacts-map-inner ${innerVisible ? "fade-in" : "fade-in-hidden"}`}
+        className={`contacts-map-inner ${
+          innerVisible ? "fade-in" : "fade-in-hidden"
+        }`}
         ref={innerRef}
       >
         <div className="contacts-map-contacts">
-          <h2>Связаться с нами</h2>
+          <h2>{t("contacts.contactTitle")}</h2>
           <div>
-            <span>Адрес:</span>
+            <span>{t("contacts.addressLabel")}</span>
             <br />
-            {ORGANIZATION.address}
+            {t(ORGANIZATION.addressKey)}
           </div>
           <div>
-            <span>Телефон:</span>
+            <span>{t("contacts.phoneLabel")}</span>
             <br />
             <a href={`tel:${ORGANIZATION.phone}`}>{ORGANIZATION.phone}</a>
           </div>
           <div>
-            <span>Почта:</span>
+            <span>{t("contacts.emailLabel")}</span>
             <br />
             <a href={`mailto:${ORGANIZATION.email}`}>{ORGANIZATION.email}</a>
           </div>
@@ -73,10 +88,11 @@ export default function ContactsMap() {
             height="400"
             frameBorder="0"
             style={{
-              filter: "invert(0.92) saturate(0.9) brightness(0.7) contrast(1.12)",
+              filter:
+                "invert(0.92) saturate(0.9) brightness(0.7) contrast(1.12)",
               border: "none",
             }}
-            title="Карта Яндекс"
+            title={t("contacts.mapTitle")}
             allowFullScreen
           ></iframe>
         </div>

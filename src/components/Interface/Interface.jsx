@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Interface.css";
+import { useTranslation } from "react-i18next";
 
 export default function SpecifySection() {
   const titleRef = useRef(null);
@@ -9,6 +10,8 @@ export default function SpecifySection() {
   const [titleVisible, setTitleVisible] = useState(false);
   const [tabsVisible, setTabsVisible] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     function obs(ref, cb, threshold = 0.3) {
@@ -67,23 +70,20 @@ export default function SpecifySection() {
     {
       id: "technical",
       icon: "▼",
-      title: "Техническая инфраструктура",
-      description:
-        "Конфигурирование устройств и режимов работы. Каталоги, параметры и схемы, определяющие структуру и возможности комплекса.",
+      titleKey: "interface.tabs.technical.title",
+      descKey: "interface.tabs.technical.description",
     },
     {
       id: "operational",
       icon: "■",
-      title: "Операционное управление",
-      description:
-        "Рабочие интерфейсы, инструменты визуализации и процессное моделирование для управления группой МКА.",
+      titleKey: "interface.tabs.operational.title",
+      descKey: "interface.tabs.operational.description",
     },
     {
       id: "analytics",
       icon: "▲",
-      title: "Аналитика и результат",
-      description:
-        "Таблицы событий, метрики и журналы заявок, отражающие процесс и итоги работы в системе.",
+      titleKey: "interface.tabs.analytics.title",
+      descKey: "interface.tabs.analytics.description",
     },
   ];
 
@@ -166,7 +166,7 @@ export default function SpecifySection() {
           titleVisible ? "fade-in" : "fade-in-hidden"
         }`}
       >
-        Демонстрация интерфейса системы
+        {t("interface.title")}
       </h1>
 
       <div
@@ -185,8 +185,8 @@ export default function SpecifySection() {
             disabled={isTransitioning}
           >
             <span className="tab-icon">{tab.icon}</span>
-            <h3 className="tab-title">{tab.title}</h3>
-            <p className="tab-description">{tab.description}</p>
+            <h3 className="tab-title">{t(tab.titleKey)}</h3>
+            <p className="tab-description">{t(tab.descKey)}</p>
           </button>
         ))}
       </div>
@@ -260,7 +260,7 @@ export default function SpecifySection() {
                     currentImageIndex === 0 ? { opacity: 0 } : {}
                   }
                 >
-                  <ircle
+                  <rcle
                     cx="10"
                     cy="10"
                     r="6"

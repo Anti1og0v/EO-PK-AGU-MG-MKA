@@ -55,7 +55,7 @@
 }
 
 .download-item.fade-in {
-  animation: fadeInOpacity 0.8s ease-in-out forwards;
+  animation: fadeInOpacity 1.4s ease-in-out forwards;
 }
 
 .download-item__content {

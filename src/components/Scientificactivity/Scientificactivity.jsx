@@ -1,59 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Scientificactivity.css";
+import { useTranslation } from "react-i18next";
 
 export default function Scientificactivity() {
+  const { t } = useTranslation();
+
   const [visibleArr, setVisibleArr] = useState([]);
   const refsArr = useRef([]);
 
   const files = [
     {
-      title: "Документ 1",
-      description: "Подробное описание первого документа...",
-      url: "/EO-PK-AGU-MG-MKA/assets/doc.pdf",
-      fileName: "document1.pdf",
+      key: "file1",
+      url: "/EO-PK-AGU-MG-MKA/assets/2025-immod-124-138.pdf",
+      fileName: "2025-immod-124-138.pdf",
     },
-    {
-      title: "Документ 2",
-      description: "Подробное описание второго документа...",
-      url: "/assets/pdf/document2.pdf",
-      fileName: "document2.pdf",
-    },
-    {
-      title: "Документ 3",
-      description: "Третий документ с подробным описанием...",
-      url: "/assets/pdf/document3.pdf",
-      fileName: "document3.pdf",
-    },
-    {
-      title: "Документ 4",
-      description: "Описание четвёртого документа...",
-      url: "/assets/pdf/document4.pdf",
-      fileName: "document4.pdf",
-    },
-    {
-      title: "Документ 5",
-      description: "Подробное описание пятого документа...",
-      url: "/assets/pdf/document5.pdf",
-      fileName: "document5.pdf",
-    },
-    {
-      title: "Документ 6",
-      description: "Подробное описание шестого документа...",
-      url: "/assets/pdf/document6.pdf",
-      fileName: "document6.pdf",
-    },
-    {
-      title: "Документ 7",
-      description: "Седьмой документ с подробным описанием...",
-      url: "/assets/pdf/document7.pdf",
-      fileName: "document7.pdf",
-    },
-    {
-      title: "Документ 8",
-      description: "Описание восьмого документа...",
-      url: "/assets/pdf/document8.pdf",
-      fileName: "document8.pdf",
-    },
+    
   ];
 
   useEffect(() => {
@@ -102,28 +63,32 @@ export default function Scientificactivity() {
   return (
     <div className="downloads-bg">
       <div className="downloads-header fade-in">
-        <h1 className="downloads-title">Скачать документы</h1>
+        <h1 className="downloads-title">{t("downloads.title")}</h1>
         <div className="downloads-divider"></div>
         <p className="downloads-description">
-          Здесь вы найдёте все необходимые PDF-файлы и документы для скачивания.
+          {t("downloads.description")}
         </p>
       </div>
       <div className="downloads-container">
         {files.map((file, index) => (
           <div
-            key={index}
+            key={file.key}
             className={`download-item ${visibleArr[index] ? "fade-in" : ""}`}
             ref={(el) => (refsArr.current[index] = el)}
           >
             <div className="download-item__content">
-              <h2 className="download-item__title">{file.title}</h2>
-              <p className="download-item__description">{file.description}</p>
+              <h2 className="download-item__title">
+                {t(`downloads.files.${file.key}.title`)}
+              </h2>
+              <p className="download-item__description">
+                {t(`downloads.files.${file.key}.description`)}
+              </p>
             </div>
             <button
               className="download-item__btn"
               onClick={() => handleDownload(file.url, file.fileName)}
             >
-              Скачать
+              {t("downloads.downloadButton")}
             </button>
           </div>
         ))}

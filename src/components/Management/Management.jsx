@@ -1,29 +1,26 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Management.css";
+import { useTranslation } from "react-i18next";
 
 const codeChars = "01";
 
 const cards = [
   {
-    title: "Конфигурирование параметров",
-    text: "Пользователь задаёт специфику наблюдения через удобные формы, указывая координаты, временные рамки и приоритеты для космических аппаратов и наземных станций.",
-    img: '/EO-PK-AGU-MG-MKA/assets/Management1.webp',
+    key: "card1",
+    img: "/EO-PK-AGU-MG-MKA/assets/Management1.webp",
   },
   {
-    title: "Планирование миссий",
-    text: "Система позволяет формировать детализированные задачи и сценарии съёмки, оптимизируя распределение ресурсов и маршрутов для группировки спутников.",
-    img: '/EO-PK-AGU-MG-MKA/assets/Management2.webp',
+    key: "card2",
+    img: "/EO-PK-AGU-MG-MKA/assets/Management2.webp",
   },
   {
-    title: "Мониторинг и контроль процессов",
-    text: "Отслеживание текущего состояния задач с визуализацией маршрутов, графиков коммуникаций и статусов выполнения в режиме реального времени.",
-    img: '/EO-PK-AGU-MG-MKA/assets/Management3.webp',
+    key: "card3",
+    img: "/EO-PK-AGU-MG-MKA/assets/Management3.webp",
   },
   {
-    title: "Результаты и отчётность",
-    text: "Предоставление развернутых отчётов и статистики по итогам выполнения миссий с возможностью экспорта данных для дальнейшего анализа.",
-    img: '/EO-PK-AGU-MG-MKA/assets/Management4.webp',
-  }
+    key: "card4",
+    img: "/EO-PK-AGU-MG-MKA/assets/Management4.webp",
+  },
 ];
 
 function FallingCode() {
@@ -61,10 +58,10 @@ function FallingCode() {
         delay,
       };
 
-      setChars(prev => [...prev, newChar]);
+      setChars((prev) => [...prev, newChar]);
 
       setTimeout(() => {
-        setChars(prev => prev.filter(c => c.id !== newChar.id));
+        setChars((prev) => prev.filter((c) => c.id !== newChar.id));
       }, (duration + delay) * 1200);
     };
 
@@ -78,14 +75,14 @@ function FallingCode() {
 
   return (
     <div className="falling-code-container">
-      {chars.map(charObj => (
+      {chars.map((charObj) => (
         <div
           key={charObj.id}
           className="falling-char"
           style={{
             left: `${charObj.left}px`,
-            '--duration': `${charObj.duration}s`,
-            '--delay': `${charObj.delay}s`,
+            "--duration": `${charObj.duration}s`,
+            "--delay": `${charObj.delay}s`,
           }}
         >
           {charObj.char}
@@ -102,6 +99,7 @@ export default function Management() {
   const [circleNumberVisible, setCircleNumberVisible] = useState(false);
   const [headerSectionVisible, setHeaderSectionVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     function observeVisibility(ref, setVisible, threshold = 0.8) {
@@ -123,7 +121,11 @@ export default function Management() {
       };
     }
 
-    const headerCleanup = observeVisibility(headerSectionRef, setHeaderSectionVisible, 0.8);
+    const headerCleanup = observeVisibility(
+      headerSectionRef,
+      setHeaderSectionVisible,
+      0.8
+    );
 
     return () => {
       headerCleanup && headerCleanup();
@@ -164,36 +166,50 @@ export default function Management() {
       <FallingCode />
 
       <div
-        className='management-circle-number'
+        className="management-circle-number"
         ref={circleNumberRef}
       >
         2
       </div>
 
       <div
-        className={`management-header-section ${headerSectionVisible ? 'fade-in-opacity' : 'fade-in-opacity-hidden'}`}
+        className={`management-header-section ${
+          headerSectionVisible ? "fade-in-opacity" : "fade-in-opacity-hidden"
+        }`}
         ref={headerSectionRef}
       >
-        <h1 className="management-title">Интерактивное управление и анализ</h1>
+        <h1 className="management-title">
+          {t("management.title")}
+        </h1>
         <div className="management-divider"></div>
         <p className="management-description-text">
-          Система предоставляет расширенные возможности по заданию параметров наблюдений, планированию миссий, контролю выполнения и анализу результатов в едином интерфейсе.
+          {t("management.description")}
         </p>
       </div>
 
       <div className="management-cards-grid">
         {cards.map((card, idx) => (
           <div
-            className={`management-card ${visibleCards.includes(idx) ? 'fade-in' : 'fade-in-hidden'}`}
-            key={idx}
+            className={`management-card ${
+              visibleCards.includes(idx) ? "fade-in" : "fade-in-hidden"
+            }`}
+            key={card.key}
             ref={(el) => (cardRefs.current[idx] = el)}
           >
             <div className="management-card-corner-img-wrapper">
-              <img src={card.img} alt={`card-icon-${idx + 1}`} className="management-card-corner-img" />
+              <img
+                src={card.img}
+                alt={`card-icon-${idx + 1}`}
+                className="management-card-corner-img"
+              />
               <span className="management-corner-circle"></span>
             </div>
-            <h3 className="management-card-title">{card.title}</h3>
-            <p className="management-card-text">{card.text}</p>
+            <h3 className="management-card-title">
+              {t(`management.cards.${card.key}.title`)}
+            </h3>
+            <p className="management-card-text">
+              {t(`management.cards.${card.key}.text`)}
+            </p>
           </div>
         ))}
       </div>

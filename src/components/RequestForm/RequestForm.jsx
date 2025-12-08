@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./RequestForm.css";
+import { useTranslation } from "react-i18next";
 
 export default function ContactForm() {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -73,7 +76,6 @@ export default function ContactForm() {
         setFormData({ name: "", email: "", phone: "", message: "" });
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
-        const errorData = await response.json();
         setSubmitStatus("error");
         setTimeout(() => setSubmitStatus(null), 5000);
       }
@@ -93,10 +95,10 @@ export default function ContactForm() {
         }`}
         ref={headerRef}
       >
-        <h1 className="contact-form-title">Свяжитесь с нами</h1>
+        <h1 className="contact-form-title">{t("request.title")}</h1>
         <div className="contact-form-divider"></div>
         <p className="contact-form-description">
-          Отправьте нам сообщение, и мы свяжемся с вами в ближайшее время
+          {t("request.description")}
         </p>
       </div>
 
@@ -109,7 +111,7 @@ export default function ContactForm() {
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name" className="form-label">
-              Имя
+              {t("request.fields.name.label")}
             </label>
             <input
               type="text"
@@ -118,14 +120,14 @@ export default function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               className="form-input"
-              placeholder="Ваше имя"
+              placeholder={t("request.fields.name.placeholder")}
               required
               disabled={isSubmitting}
             />
           </div>
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              Email
+              {t("request.fields.email.label")}
             </label>
             <input
               type="email"
@@ -134,14 +136,14 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               className="form-input"
-              placeholder="ваш@email.com"
+              placeholder={t("request.fields.email.placeholder")}
               required
               disabled={isSubmitting}
             />
           </div>
           <div className="form-group">
             <label htmlFor="phone" className="form-label">
-              Телефон
+              {t("request.fields.phone.label")}
             </label>
             <input
               type="tel"
@@ -150,14 +152,14 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               className="form-input"
-              placeholder="+7 (999) 999-99-99"
+              placeholder={t("request.fields.phone.placeholder")}
               required
               disabled={isSubmitting}
             />
           </div>
           <div className="form-group">
             <label htmlFor="message" className="form-label">
-              Сообщение
+              {t("request.fields.message.label")}
             </label>
             <textarea
               id="message"
@@ -165,7 +167,7 @@ export default function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               className="form-textarea"
-              placeholder="Ваше сообщение..."
+              placeholder={t("request.fields.message.placeholder")}
               rows="6"
               required
               disabled={isSubmitting}
@@ -176,16 +178,16 @@ export default function ContactForm() {
             className="form-submit-btn"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Отправка..." : "Отправить"}
+            {isSubmitting ? t("request.submit.sending") : t("request.submit.default")}
           </button>
           {submitStatus === "success" && (
             <div className="form-status-message success">
-              Сообщение успешно отправлено!
+              {t("request.status.success")}
             </div>
           )}
           {submitStatus === "error" && (
             <div className="form-status-message error">
-              Ошибка при отправке. Попробуйте ещё раз.
+              {t("request.status.error")}
             </div>
           )}
         </form>

@@ -1,8 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import "./Main.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-export default function Main({ isBgActive, onRequestClick, onRequestHover, onRequestUnhover, onDescriptionScroll }) {
+export default function Main({
+  isBgActive,
+  onRequestClick,
+  onRequestHover,
+  onRequestUnhover,
+  onDescriptionScroll
+}) {
   const [appeared, setAppeared] = useState(false);
   const [bg1Loaded, setBg1Loaded] = useState(false);
   const [bg2Loaded, setBg2Loaded] = useState(false);
@@ -10,6 +17,7 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setTimeout(() => setAppeared(true), 80);
@@ -70,42 +78,60 @@ export default function Main({ isBgActive, onRequestClick, onRequestHover, onReq
 
       <div className={`hero-blackpage__container${appeared ? " enter-appear" : ""}`}>
         <div className="hero-blackpage__left">
-          <div className="hero-blackpage__seed fade-in-item" style={{ "--delay": "0.2s" }}>
-            Новый уровень управления
+          <div
+            className="hero-blackpage__seed fade-in-item"
+            style={{ "--delay": "0.2s" }}
+          >
+            {t("main.seed")}
           </div>
-          
-          <h1 className="hero-blackpage__title fade-in-item" style={{ "--delay": "0.4s" }}>
-            Автономный разум на орбите
+
+          <h1
+            className="hero-blackpage__title fade-in-item"
+            style={{ "--delay": "0.4s" }}
+          >
+            {t("main.title")}
           </h1>
 
-          <div className="hero-blackpage__subtitle fade-in-item" style={{ "--delay": "0.6s" }}>
-            Мультиагентный подход нового поколения в управлении орбитальными группировками.
+          <div
+            className="hero-blackpage__subtitle fade-in-item"
+            style={{ "--delay": "0.6s" }}
+          >
+            {t("main.subtitle")}
           </div>
 
-          <div className="hero-blackpage__focus-title fade-in-item" style={{ "--delay": "0.8s" }}>
-            Что мы решаем:
+          <div
+            className="hero-blackpage__focus-title fade-in-item"
+            style={{ "--delay": "0.8s" }}
+          >
+            {t("main.focusTitle")}
           </div>
 
-          <ul className="hero-blackpage__focus-list fade-in-item" style={{ "--delay": "1s" }}>
-            <li>Распределение заявок на съёмку поверхности Земли</li>
-            <li>Планирование работы наземных средств</li>
-            <li>Маршрутизация обмена данными между спутниками</li>
-            <li>Автоматизация смены режимов полёта КА</li>
+          <ul
+            className="hero-blackpage__focus-list fade-in-item"
+            style={{ "--delay": "1s" }}
+          >
+            <li>{t("main.focus1")}</li>
+            <li>{t("main.focus2")}</li>
+            <li>{t("main.focus3")}</li>
+            <li>{t("main.focus4")}</li>
           </ul>
 
-          <div className="hero-blackpage__actions fade-in-item" style={{ "--delay": "1.2s" }}>
+          <div
+            className="hero-blackpage__actions fade-in-item"
+            style={{ "--delay": "1.2s" }}
+          >
             <Link to="/request" className="nav-main__btn">
-              Оставить заявку
+              {t("header.request")}
             </Link>
             <a
               className="doc-dropdown-btn"
               href="#"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 if (onDescriptionScroll) onDescriptionScroll();
               }}
             >
-              Подробнее о возможностях
+              {t("main.more")}
               <span className="doc-arrow">▼</span>
             </a>
           </div>

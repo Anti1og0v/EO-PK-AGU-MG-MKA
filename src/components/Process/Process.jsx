@@ -1,37 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Process.css";
+import { useTranslation } from "react-i18next";
 
 const steps = [
-  {
-    number: 1,
-    title: "Оператор запускает систему",
-    text: "Система разворачивается на сервере и готова к работе после быстрой установки и инициализации базы данных.",
-  },
-  {
-    number: 2,
-    title: "Работа через веб-интерфейс",
-    text: "Оператор авторизуется в удобной панели управления через браузер и получает доступ ко всем функциям.",
-  },
-  {
-    number: 3,
-    title: "Выбор объекта и регистрация событий",
-    text: "Все основные действия (выбор объекта, регистрация или редактирование событий, мониторинг) выполняются через интуитивный интерфейс.",
-  },
-  {
-    number: 4,
-    title: "Автоматизация рутинных задач",
-    text: "Система автоматически фиксирует важные события, ведёт логи и отслеживает ключевые показатели эффективности.",
-  },
-  {
-    number: 5,
-    title: "Быстрая интеграция",
-    text: "Легко подключается к другим сервисам, поддерживает расширение и подключение дополнительного оборудования.",
-  },
-  {
-    number: 6,
-    title: "Безопасность и контроль",
-    text: "Доступ защищён, все действия операторов фиксируются для прозрачности и безопасной работы.",
-  }
+  { key: "step1", number: 1 },
+  { key: "step2", number: 2 },
+  { key: "step3", number: 3 },
+  { key: "step4", number: 4 },
+  { key: "step5", number: 5 },
+  { key: "step6", number: 6 }
 ];
 
 export default function Process() {
@@ -41,6 +18,7 @@ export default function Process() {
   const [circleNumberVisible, setCircleNumberVisible] = useState(false);
   const [headerSectionVisible, setHeaderSectionVisible] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     function observeVisibility(ref, setVisible, threshold = 0.8) {
@@ -62,8 +40,16 @@ export default function Process() {
       };
     }
 
-    const circleCleanup = observeVisibility(circleNumberRef, setCircleNumberVisible, 0.5);
-    const headerCleanup = observeVisibility(headerSectionRef, setHeaderSectionVisible, 0.8);
+    const circleCleanup = observeVisibility(
+      circleNumberRef,
+      setCircleNumberVisible,
+      0.5
+    );
+    const headerCleanup = observeVisibility(
+      headerSectionRef,
+      setHeaderSectionVisible,
+      0.8
+    );
 
     return () => {
       circleCleanup && circleCleanup();
@@ -103,36 +89,46 @@ export default function Process() {
   return (
     <div className="process-bg">
       <div
-        className={`process-circle-number ${circleNumberVisible ? 'fade-in-opacity' : 'fade-in-opacity-hidden'}`}
+        className={`process-circle-number ${
+          circleNumberVisible ? "fade-in-opacity" : "fade-in-opacity-hidden"
+        }`}
         ref={circleNumberRef}
       >
         3
       </div>
 
       <div
-        className={`process-header-section ${headerSectionVisible ? 'fade-in-opacity' : 'fade-in-opacity-hidden'}`}
+        className={`process-header-section ${
+          headerSectionVisible ? "fade-in-opacity" : "fade-in-opacity-hidden"
+        }`}
         ref={headerSectionRef}
       >
-        <h1 className="process-title">Процесс работы системы</h1>
+        <h1 className="process-title">{t("process.title")}</h1>
         <div className="process-divider"></div>
         <p className="process-description-text">
-          Пошаговая схема показывает, как легко начать работу с продуктом: от инициализации и простого входа до полной автоматизации задач, интеграции с внешними сервисами и обеспечения безопасности всех операций.
+          {t("process.description")}
         </p>
       </div>
 
       <div className="process-cards-grid">
         {steps.map((card, idx) => (
           <div
-            className={`process-card ${visibleCards.includes(idx) ? 'fade-in' : 'fade-in-hidden'}`}
-            key={idx}
+            className={`process-card ${
+              visibleCards.includes(idx) ? "fade-in" : "fade-in-hidden"
+            }`}
+            key={card.key}
             ref={(el) => (cardRefs.current[idx] = el)}
           >
             <div className="process-card-corner-img-wrapper">
               <span className="process-step-number">{card.number}</span>
               <span className="process-corner-circle"></span>
             </div>
-            <h3 className="process-card-title">{card.title}</h3>
-            <p className="process-card-text">{card.text}</p>
+            <h3 className="process-card-title">
+              {t(`process.steps.${card.key}.title`)}
+            </h3>
+            <p className="process-card-text">
+              {t(`process.steps.${card.key}.text`)}
+            </p>
           </div>
         ))}
       </div>
