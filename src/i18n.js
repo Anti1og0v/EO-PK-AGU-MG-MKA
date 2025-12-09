@@ -12,7 +12,7 @@ i18n
           header: {
             logo: "Литсам",
             home: "Главная",
-            functional: "Функциональные описания",
+            functional: "Функциональные возможности",
             activity: "Научная деятельность",
             request: "Оставить заявку"
           },
@@ -186,7 +186,7 @@ i18n
             }
           },
           functional: {
-            title: "Функциональные описания",
+            title: "Функциональные возможности",
             blocks: {
               block1: {
                 title: "Программный комплекс автономного группового управления многоспутниковыми группировками МКА",
@@ -228,7 +228,7 @@ i18n
           header: {
             logo: "Litsam",
             home: "Home",
-            functional: "Functional descriptions",
+            functional: "Functional features",
             activity: "Scientific activity",
             request: "Leave a request"
           },
@@ -402,7 +402,7 @@ i18n
             }
           },
           functional: {
-            title: "Functional descriptions",
+            title: "Functional features",
             blocks: {
               block1: {
                 title: "Software suite for autonomous group control of multi-satellite constellations of small spacecraft",
@@ -503,7 +503,7 @@ i18n
           header: {
             logo: "利萨姆",
             home: "主页",
-            functional: "功能描述",
+            functional: "功能特性",
             activity: "科学活动",
             request: "提交申请"
           },
@@ -676,7 +676,7 @@ i18n
             }
           },
           functional: {
-            title: "功能说明",
+            title: "功能特性",
             blocks: {
               block1: {
                 title: "用于多小卫星星座自主群控的软件系统",
