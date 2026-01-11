@@ -20,7 +20,8 @@ export default function Main({
   const { t } = useTranslation();
 
   useEffect(() => {
-    setTimeout(() => setAppeared(true), 80);
+    const timer = setTimeout(() => setAppeared(true), 80);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function Main({
       },
       { threshold: [0, 0.15] }
     );
+
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, [bg1Loaded, bg2Loaded]);
@@ -57,6 +59,7 @@ export default function Main({
       const progress = Math.min(1, scrolled / (sectionHeight * 0.5));
       setScrollProgress(progress);
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isInView]);
@@ -66,7 +69,7 @@ export default function Main({
       ref={sectionRef}
       className={`hero-blackpage${isBgActive ? " hover-bg" : ""}`}
       style={{
-        "--scroll-progress": scrollProgress,
+        "--scroll-progress": scrollProgress
       }}
     >
       <div
@@ -76,7 +79,11 @@ export default function Main({
         className={`hero-blackpage__bg2${bg2Loaded ? " loaded fade-in" : ""}`}
       />
 
-      <div className={`hero-blackpage__container${appeared ? " enter-appear" : ""}`}>
+      <div
+        className={`hero-blackpage__container${
+          appeared ? " enter-appear" : ""
+        }`}
+      >
         <div className="hero-blackpage__left">
           <div
             className="hero-blackpage__seed fade-in-item"
@@ -123,12 +130,13 @@ export default function Main({
             <Link to="/request" className="nav-main__btn">
               {t("header.request")}
             </Link>
+
             <a
               className="doc-dropdown-btn"
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (onDescriptionScroll) onDescriptionScroll();
+                onDescriptionScroll?.();
               }}
             >
               {t("main.more")}
