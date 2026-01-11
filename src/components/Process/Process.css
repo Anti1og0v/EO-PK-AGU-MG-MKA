@@ -188,7 +188,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 400px) {
   .process-description-text, .process-card-text {
     max-width: 90vw;
     font-size: 0.85rem;
@@ -213,6 +213,9 @@
   .process-card {
     min-height: 275px;
     max-width: 270px;
+  }
+  .process-title{
+    transform: translateX(-8px);
   }
   .process-card-corner-img-wrapper {
     position: absolute;
