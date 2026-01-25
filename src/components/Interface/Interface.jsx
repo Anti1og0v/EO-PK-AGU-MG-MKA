@@ -260,7 +260,7 @@ export default function SpecifySection() {
                     currentImageIndex === 0 ? { opacity: 0 } : {}
                   }
                 >
-                  <rcle
+                  <circle
                     cx="10"
                     cy="10"
                     r="6"
